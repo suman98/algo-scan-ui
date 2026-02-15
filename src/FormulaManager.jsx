@@ -593,38 +593,53 @@ const EquationBuilder = ({ initialTokens = [], onSave, onCancel }) => {
               <span className="bg-cyan-500 text-black px-3 py-1 rounded-full text-sm">{currentFunction}</span>
             </h3>
             
-            {FUNCTIONS[currentFunction]?.params.map(param => (
-              <div key={param.name} className="mb-4">
-                <label className="block text-slate-400 mb-2 text-sm">
-                  {param.name} <span className="text-slate-600">{param.description}</span>
-                </label>
-                {param.type === 'source' ? (
-                  <select
-                    value={paramValues[param.name]}
-                    onChange={(e) => setParamValues({ ...paramValues, [param.name]: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-900 border-2 border-slate-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none"
-                  >
-                    {SOURCE_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                  </select>
-                ) : param.type === 'select' ? (
-                  <select
-                    value={paramValues[param.name]}
-                    onChange={(e) => setParamValues({ ...paramValues, [param.name]: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-900 border-2 border-slate-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none"
-                  >
-                    {param.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                  </select>
-                ) : (
-                  <input
-                    type="number"
-                    value={paramValues[param.name]}
-                    onChange={(e) => setParamValues({ ...paramValues, [param.name]: e.target.value })}
-                    readOnly={param.locked}
-                    className="w-full px-4 py-3 bg-slate-900 border-2 border-slate-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none"
-                  />
-                )}
-              </div>
-            ))}
+            {/* Get existing function tokens for source options */}
+            {(() => {
+              const existingFunctions = tokens
+                .filter((t, idx) => t.type === 'function' && idx !== editingTokenIndex)
+                .map(t => t.value);
+              const sourceOptionsWithFunctions = [...SOURCE_OPTIONS, ...existingFunctions];
+              
+              return FUNCTIONS[currentFunction]?.params.map(param => (
+                <div key={param.name} className="mb-4">
+                  <label className="block text-slate-400 mb-2 text-sm">
+                    {param.name} <span className="text-slate-600">{param.description}</span>
+                  </label>
+                  {param.type === 'source' ? (
+                    <select
+                      value={paramValues[param.name]}
+                      onChange={(e) => setParamValues({ ...paramValues, [param.name]: e.target.value })}
+                      className="w-full px-4 py-3 bg-slate-900 border-2 border-slate-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none"
+                    >
+                      <optgroup label="Price Data">
+                        {SOURCE_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                      </optgroup>
+                      {existingFunctions.length > 0 && (
+                        <optgroup label="Functions">
+                          {existingFunctions.map((func, idx) => <option key={`func-${idx}`} value={func}>{func}</option>)}
+                        </optgroup>
+                      )}
+                    </select>
+                  ) : param.type === 'select' ? (
+                    <select
+                      value={paramValues[param.name]}
+                      onChange={(e) => setParamValues({ ...paramValues, [param.name]: e.target.value })}
+                      className="w-full px-4 py-3 bg-slate-900 border-2 border-slate-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none"
+                    >
+                      {param.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                    </select>
+                  ) : (
+                    <input
+                      type="number"
+                      value={paramValues[param.name]}
+                      onChange={(e) => setParamValues({ ...paramValues, [param.name]: e.target.value })}
+                      readOnly={param.locked}
+                      className="w-full px-4 py-3 bg-slate-900 border-2 border-slate-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none"
+                    />
+                  )}
+                </div>
+              ));
+            })()}
 
             <div className="bg-slate-900 rounded-lg p-3 mb-4">
               <div className="text-slate-500 text-xs uppercase mb-1">Preview</div>
