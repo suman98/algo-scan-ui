@@ -430,6 +430,41 @@ const EquationBuilder = ({ initialTokens = [], onSave, onCancel }) => {
     return `${currentFunction}(${values.join(', ')})`;
   };
 
+  // Validate that formula is a boolean equation (contains comparison operator with operands on both sides)
+  const validateBooleanFormula = () => {
+    if (tokens.length === 0) return { valid: false, message: 'Formula is empty' };
+    
+    const comparisonIndex = tokens.findIndex(t => t.type === 'comparison');
+    if (comparisonIndex === -1) {
+      return { valid: false, message: 'Formula must contain a comparison operator (&gt;, &lt;, ≥, ≤, ==, ≠)' };
+    }
+    
+    // Check if there's at least one operand (function/number) on the left side
+    const leftSide = tokens.slice(0, comparisonIndex);
+    const hasLeftOperand = leftSide.some(t => t.type === 'function' || t.type === 'number');
+    if (!hasLeftOperand) {
+      return { valid: false, message: 'Missing left side of comparison' };
+    }
+    
+    // Check if there's at least one operand (function/number) on the right side
+    const rightSide = tokens.slice(comparisonIndex + 1);
+    const hasRightOperand = rightSide.some(t => t.type === 'function' || t.type === 'number');
+    if (!hasRightOperand) {
+      return { valid: false, message: 'Missing right side of comparison' };
+    }
+    
+    // Check formula doesn't end with an operator
+    const lastToken = tokens[tokens.length - 1];
+    if (lastToken.type === 'operator' || lastToken.type === 'comparison') {
+      return { valid: false, message: 'Formula cannot end with an operator' };
+    }
+    
+    return { valid: true, message: '' };
+  };
+  
+  const validation = validateBooleanFormula();
+  const isValidBooleanFormula = validation.valid;
+
   return (
     <div className="p-6">
       {/* Equation Display */}
@@ -527,6 +562,13 @@ const EquationBuilder = ({ initialTokens = [], onSave, onCancel }) => {
         </div>
       </div>
 
+      {/* Validation Message */}
+      {tokens.length > 0 && !isValidBooleanFormula && (
+          <div className="bg-red-900/30 border border-red-500 rounded-lg p-3 mb-4 text-red-400 text-sm">
+            ⚠️ {validation.message}
+          </div>
+      )}
+
       {/* Action Buttons */}
       <div className="flex gap-3 justify-end">
         <button onClick={onCancel} className="px-6 py-3 bg-slate-600 text-white rounded-lg hover:bg-slate-500 font-bold">
@@ -534,7 +576,8 @@ const EquationBuilder = ({ initialTokens = [], onSave, onCancel }) => {
         </button>
         <button 
           onClick={() => onSave({ tokens, equation: getEquationString() })} 
-          disabled={tokens.length === 0}
+          disabled={!isValidBooleanFormula}
+          title={!isValidBooleanFormula ? 'Formula must contain a comparison operator' : ''}
           className="px-6 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 font-bold disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Save Formula
