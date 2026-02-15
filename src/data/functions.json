@@ -1,18 +1,18 @@
 {
   "SOURCE": {
-    "params": [{ "name": "N", "type": "number", "default": 0, "description": "Offset" }]
+    "params": [{ "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" }]
   },
   "RSI": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 14, "description": "Period" }
     ]
   },
   "BBAND": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 20, "description": "Period" },
       { "name": "factor", "type": "number", "default": 2, "description": "Standard Deviation Factor" },
       { "name": "band", "type": "select", "options": ["U", "L", "M"], "default": "M", "description": "Band (Upper/Lower/Middle)" }
@@ -21,49 +21,49 @@
   "EMA": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 12, "description": "Period" }
     ]
   },
   "SMA": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 20, "description": "Period" }
     ]
   },
   "MAX": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "HIGH" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 14, "description": "Period" }
     ]
   },
   "MIN": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "LOW" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 14, "description": "Period" }
     ]
   },
   "CCI": {
     "params": [
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 20, "description": "Period" }
     ]
   },
   "MFI": {
     "params": [
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 14, "description": "Period" }
     ]
   },
   "AWESOMEOSCILLATOR": {
-    "params": [{ "name": "N", "type": "number", "default": 0, "description": "Offset" }]
+    "params": [{ "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" }]
   },
   "STOCH": {
     "params": [
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 14, "description": "Period" },
       { "name": "signalPeriod", "type": "number", "default": 3, "description": "Signal Period" }
     ]
@@ -71,7 +71,7 @@
   "STOCHRSI": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "rsiPeriod", "type": "number", "default": 14, "description": "RSI Period" },
       { "name": "stochasticPeriod", "type": "number", "default": 14, "description": "Stochastic Period" },
       { "name": "kPeriod", "type": "number", "default": 3, "description": "K Period" },
@@ -82,7 +82,7 @@
   "MACD": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 9, "description": "Period" },
       { "name": "fastPeriod", "type": "number", "default": 12, "description": "Fast Period" },
       { "name": "slowPeriod", "type": "number", "default": 26, "description": "Slow Period" },
@@ -93,55 +93,55 @@
   "WMA": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 12, "description": "Period" }
     ]
   },
   "ROC": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 12, "description": "Period" }
     ]
   },
   "ATR": {
     "params": [
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 14, "description": "Period" }
     ]
   },
   "HMA": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 14, "description": "Period" }
     ]
   },
   "TEMA": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 14, "description": "Period" }
     ]
   },
   "DEMA": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 14, "description": "Period" }
     ]
   },
   "BBW": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 20, "description": "Period" },
       { "name": "factor", "type": "number", "default": 2, "description": "Factor" }
     ]
   },
   "SuperTrend": {
     "params": [
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 10, "description": "Period" },
       { "name": "factor", "type": "number", "default": 3, "description": "Factor" }
     ]
@@ -149,7 +149,7 @@
   "KST": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "A", "type": "number", "default": 10, "description": "ROC Period 1" },
       { "name": "B", "type": "number", "default": 15, "description": "ROC Period 2" },
       { "name": "C", "type": "number", "default": 20, "description": "ROC Period 3" },
@@ -166,7 +166,7 @@
     "params": [
       { "name": "SOURCE1", "type": "source", "default": "HIGH" },
       { "name": "SOURCE2", "type": "source", "default": "LOW" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "step", "type": "number", "default": 0.02, "description": "Step" },
       { "name": "max", "type": "number", "default": 0.2, "description": "Max" }
     ]
@@ -176,7 +176,7 @@
       { "name": "SOURCE1", "type": "source", "default": "HIGH" },
       { "name": "SOURCE2", "type": "source", "default": "LOW" },
       { "name": "SOURCE3", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 14, "description": "Period" },
       { "name": "output", "type": "select", "options": ["A", "M", "P"], "default": "A", "description": "Output (ADX/MinusDI/PlusDI)" }
     ]
@@ -193,14 +193,14 @@
   "SD": {
     "params": [
       { "name": "SOURCE", "type": "source", "default": "CLOSE" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 20, "description": "Period" },
       { "name": "multiplier", "type": "number", "default": 1, "description": "Multiplier" }
     ]
   },
   "KeltnerChannels": {
     "params": [
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 20, "description": "Period" },
       { "name": "atr", "type": "number", "default": 10, "description": "ATR Period" },
       { "name": "multiplier", "type": "number", "default": 1, "description": "Multiplier" },
@@ -211,7 +211,7 @@
     "params": [
       { "name": "SOURCE1", "type": "source", "default": "HIGH" },
       { "name": "SOURCE2", "type": "source", "default": "LOW" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "conversion", "type": "number", "default": 9, "description": "Conversion Period" },
       { "name": "base", "type": "number", "default": 26, "description": "Base Period" },
       { "name": "span", "type": "number", "default": 52, "description": "Span Period" },
@@ -223,7 +223,7 @@
     "params": [
       { "name": "SOURCE1", "type": "source", "default": "HIGH" },
       { "name": "SOURCE2", "type": "source", "default": "LOW" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "period", "type": "number", "default": 25, "description": "Period" },
       { "name": "output", "type": "select", "options": ["U", "L"], "default": "U", "description": "Output (Up/Down)" }
     ]
@@ -232,7 +232,7 @@
     "params": [
       { "name": "SOURCE1", "type": "source", "default": "HIGH" },
       { "name": "SOURCE2", "type": "source", "default": "LOW" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
+      { "name": "N", "type": "number", "default": 0, "description": "Last Trading Candle" },
       { "name": "atrPeriod", "type": "number", "default": 22, "description": "ATR Period" },
       { "name": "atrMultiplier", "type": "number", "default": 3, "description": "ATR Multiplier" },
       { "name": "output", "type": "select", "options": ["L", "S"], "default": "L", "description": "Output (Long/Short)" }
