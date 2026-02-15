@@ -134,12 +134,19 @@ const EquationBuilder = ({ initialTokens = [], onChange }) => {
     setEditingTokenIndex(-1);
   };
 
+  // Check if a comparison operator already exists
+  const hasComparisonOperator = tokens.some(t => t.type === 'comparison');
+
   const addOperator = (op) => {
     if (tokens.length === 0) return;
     const lastToken = tokens[tokens.length - 1];
     if (lastToken.type === 'operator' || lastToken.type === 'comparison') return;
     
     const isComparison = ['>', '<', '>=', '<=', '==', '!='].includes(op);
+    
+    // Only allow one comparison operator
+    if (isComparison && hasComparisonOperator) return;
+    
     setTokens([...tokens, { type: isComparison ? 'comparison' : 'operator', value: op }]);
   };
 
@@ -173,6 +180,11 @@ const EquationBuilder = ({ initialTokens = [], onChange }) => {
   const updateOperator = (newOp) => {
     const newTokens = [...tokens];
     const isComparison = ['>', '<', '>=', '<=', '==', '!='].includes(newOp);
+    const currentToken = tokens[operatorPopup.index];
+    
+    // If trying to change to comparison, check if one already exists (excluding current token)
+    if (isComparison && currentToken.type !== 'comparison' && hasComparisonOperator) return;
+    
     newTokens[operatorPopup.index] = { type: isComparison ? 'comparison' : 'operator', value: newOp };
     setTokens(newTokens);
     setOperatorPopup({ show: false, index: -1, position: { x: 0, y: 0 } });
@@ -309,7 +321,13 @@ const EquationBuilder = ({ initialTokens = [], onChange }) => {
             </button>
           ))}
           {['>', '<', '>=', '<=', '==', '!='].map(op => (
-            <button key={op} onClick={() => addOperator(op)} className="px-4 py-2 bg-green-900/50 text-green-400 rounded-lg hover:bg-green-800/50 font-bold">
+            <button 
+              key={op} 
+              onClick={() => addOperator(op)} 
+              disabled={hasComparisonOperator}
+              className={`px-4 py-2 rounded-lg font-bold ${hasComparisonOperator ? 'bg-slate-700/30 text-slate-500 cursor-not-allowed' : 'bg-green-900/50 text-green-400 hover:bg-green-800/50'}`}
+              title={hasComparisonOperator ? 'Only one comparison operator allowed' : ''}
+            >
               {OPERATOR_DISPLAY[op]}
             </button>
           ))}
@@ -409,55 +427,96 @@ const EquationBuilder = ({ initialTokens = [], onChange }) => {
 
       {/* Operator Popup */}
       {operatorPopup.show && (
-        <div 
-          className="fixed bg-slate-800 border-2 border-slate-600 rounded-lg p-3 z-50 shadow-xl"
-          style={{ left: operatorPopup.position.x, top: operatorPopup.position.y }}
-        >
-          <div className="grid grid-cols-4 gap-2 mb-2">
-            {['+', '-', '*', '/', '>', '<', '>=', '<=', '==', '!='].map(op => (
-              <button
-                key={op}
-                onClick={() => updateOperator(op)}
-                className={`px-3 py-2 rounded font-bold ${['>', '<', '>=', '<=', '==', '!='].includes(op) ? 'bg-green-900/50 text-green-400' : 'bg-slate-700 text-white'} hover:bg-slate-600`}
-              >
-                {OPERATOR_DISPLAY[op]}
-              </button>
-            ))}
-          </div>
-          <button 
-            onClick={() => { deleteToken(operatorPopup.index); setOperatorPopup({ show: false, index: -1, position: { x: 0, y: 0 } }); }} 
-            className="w-full px-3 py-2 bg-red-900/50 text-red-400 rounded font-bold hover:bg-red-800/50"
+        <>
+          {/* Backdrop to close on outside click */}
+          <div 
+            className="fixed inset-0 z-40" 
+            onClick={() => setOperatorPopup({ show: false, index: -1, position: { x: 0, y: 0 } })}
+          />
+          <div 
+            className="fixed bg-slate-800 border-2 border-slate-600 rounded-lg p-3 z-50 shadow-xl"
+            style={{ left: operatorPopup.position.x, top: operatorPopup.position.y }}
           >
-            🗑 Delete
-          </button>
-        </div>
+            <div className="grid grid-cols-4 gap-2 mb-2">
+              {['+', '-', '*', '/', '>', '<', '>=', '<=', '==', '!='].map(op => {
+                const isComparison = ['>', '<', '>=', '<=', '==', '!='].includes(op);
+                const currentIsComparison = tokens[operatorPopup.index]?.type === 'comparison';
+                const isDisabled = isComparison && !currentIsComparison && hasComparisonOperator;
+                
+                return (
+                  <button
+                    key={op}
+                    onClick={() => !isDisabled && updateOperator(op)}
+                    disabled={isDisabled}
+                    className={`px-3 py-2 rounded font-bold ${
+                      isDisabled 
+                        ? 'bg-slate-700/30 text-slate-500 cursor-not-allowed' 
+                        : isComparison 
+                          ? 'bg-green-900/50 text-green-400 hover:bg-slate-600' 
+                          : 'bg-slate-700 text-white hover:bg-slate-600'
+                    }`}
+                  >
+                    {OPERATOR_DISPLAY[op]}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => setOperatorPopup({ show: false, index: -1, position: { x: 0, y: 0 } })} 
+                className="flex-1 px-3 py-2 bg-slate-600 text-white rounded font-bold hover:bg-slate-500"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={() => { deleteToken(operatorPopup.index); setOperatorPopup({ show: false, index: -1, position: { x: 0, y: 0 } }); }} 
+                className="px-3 py-2 bg-red-900/50 text-red-400 rounded font-bold hover:bg-red-800/50"
+              >
+                🗑 Delete
+              </button>
+            </div>
+          </div>
+        </>
       )}
 
       {/* Number Popup */}
       {numberPopup.show && (
-        <div 
-          className="fixed bg-slate-800 border-2 border-slate-600 rounded-lg p-3 z-50 shadow-xl"
-          style={{ left: numberPopup.position.x, top: numberPopup.position.y }}
-        >
-          <input
-            type="number"
-            value={numberPopup.value}
-            onChange={(e) => setNumberPopup({ ...numberPopup, value: e.target.value })}
-            className="w-28 px-3 py-2 bg-slate-900 border-2 border-slate-600 rounded text-purple-300 mb-2 focus:border-purple-400 focus:outline-none"
-            autoFocus
+        <>
+          {/* Backdrop to close on outside click */}
+          <div 
+            className="fixed inset-0 z-40" 
+            onClick={() => setNumberPopup({ show: false, index: -1, position: { x: 0, y: 0 }, value: '' })}
           />
-          <div className="flex gap-2">
-            <button onClick={updateNumber} className="flex-1 px-3 py-2 bg-purple-900/50 text-purple-300 rounded font-bold hover:bg-purple-800/50">
-              Update
-            </button>
-            <button 
-              onClick={() => { deleteToken(numberPopup.index); setNumberPopup({ show: false, index: -1, position: { x: 0, y: 0 }, value: '' }); }} 
-              className="px-3 py-2 bg-red-900/50 text-red-400 rounded font-bold hover:bg-red-800/50"
-            >
-              🗑
-            </button>
+          <div 
+            className="fixed bg-slate-800 border-2 border-slate-600 rounded-lg p-3 z-50 shadow-xl"
+            style={{ left: numberPopup.position.x, top: numberPopup.position.y }}
+          >
+            <input
+              type="number"
+              value={numberPopup.value}
+              onChange={(e) => setNumberPopup({ ...numberPopup, value: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-900 border-2 border-slate-600 rounded text-purple-300 mb-2 focus:border-purple-400 focus:outline-none"
+              autoFocus
+            />
+            <div className="flex gap-2">
+              <button 
+                onClick={() => setNumberPopup({ show: false, index: -1, position: { x: 0, y: 0 }, value: '' })} 
+                className="flex-1 px-3 py-2 bg-slate-600 text-white rounded font-bold hover:bg-slate-500"
+              >
+                Cancel
+              </button>
+              <button onClick={updateNumber} className="flex-1 px-3 py-2 bg-purple-900/50 text-purple-300 rounded font-bold hover:bg-purple-800/50">
+                Update
+              </button>
+              <button 
+                onClick={() => { deleteToken(numberPopup.index); setNumberPopup({ show: false, index: -1, position: { x: 0, y: 0 }, value: '' }); }} 
+                className="px-3 py-2 bg-red-900/50 text-red-400 rounded font-bold hover:bg-red-800/50"
+              >
+                🗑
+              </button>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
