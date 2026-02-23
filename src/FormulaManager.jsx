@@ -96,8 +96,8 @@ const FormulaManager = ({ initialFormulas = [], onChange }) => {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-40 p-4">
-          <div className="bg-slate-900 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-            <div className="border-b border-slate-700 px-6 py-4">
+          <div className="bg-slate-900 rounded-2xl w-full max-w-7xl h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+            <div className="border-b-2 border-slate-700 px-6 py-4 bg-slate-800">
               <h2 className="text-xl font-bold text-white">
                 {editingIndex >= 0 ? 'Edit Formula' : 'Add New Formula'}
               </h2>
