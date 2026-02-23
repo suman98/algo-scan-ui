@@ -208,12 +208,6 @@
       { "name": "output", "type": "select", "options": ["A", "M", "P"], "default": "A", "description": "Output (ADX/MinusDI/PlusDI)" }
     ]
   },
-  "OBV": {
-    "params": [
-      { "name": "timeframe", "type": "select", "options": ["1Min", "5Min", "1Hour", "Daily", "1Week", "1Month"], "default": "Daily", "description": "Timeframe" },
-      { "name": "N", "type": "number", "default": 0, "description": "Must be 0", "locked": true }
-    ]
-  },
   "ForceIndex": {
     "params": [
       { "name": "timeframe", "type": "select", "options": ["1Min", "5Min", "1Hour", "Daily", "1Week", "1Month"], "default": "Daily", "description": "Timeframe" },
@@ -261,17 +255,6 @@
       { "name": "N", "type": "number", "default": 0, "description": "Offset" },
       { "name": "period", "type": "number", "default": 25, "description": "Period" },
       { "name": "output", "type": "select", "options": ["U", "L"], "default": "U", "description": "Output (Up/Down)" }
-    ]
-  },
-  "ChandlierExit": {
-    "params": [
-      { "name": "timeframe", "type": "select", "options": ["1Min", "5Min", "1Hour", "Daily", "1Week", "1Month"], "default": "Daily", "description": "Timeframe" },
-      { "name": "SOURCE1", "type": "source", "default": "HIGH" },
-      { "name": "SOURCE2", "type": "source", "default": "LOW" },
-      { "name": "N", "type": "number", "default": 0, "description": "Offset" },
-      { "name": "atrPeriod", "type": "number", "default": 22, "description": "ATR Period" },
-      { "name": "atrMultiplier", "type": "number", "default": 3, "description": "ATR Multiplier" },
-      { "name": "output", "type": "select", "options": ["L", "S"], "default": "L", "description": "Output (Long/Short)" }
     ]
   }
 }
