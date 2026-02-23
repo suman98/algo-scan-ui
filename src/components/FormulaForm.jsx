@@ -158,15 +158,18 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
           </div>
 
           {/* ── Scrollable Body ── */}
-          <div className="flex-1 ff-scroll overflow-y-auto" style={{ width: "100%" }}>
-            <div className="flex gap-0">
-              {/* LEFT SIDEBAR (30%) — portal anchor */}
+          <div
+            className="flex-1 ff-scroll overflow-y-auto overflow-x-hidden"
+            style={{ width: "100%", maxWidth: "100%" }}
+          >
+            <div className="flex gap-0 w-full max-w-full">
+              {/* LEFT SIDEBAR (50%) — portal anchor */}
               <div className="w-[50%] flex-shrink-0 border-r border-slate-700/50 bg-slate-900/40 backdrop-blur-sm p-3">
                 <div ref={portalRootRef} className="relative z-50" />
               </div>
 
-              {/* RIGHT PANEL — Equation Builder (70%) */}
-              <div className="flex-1 flex flex-col">
+              {/* RIGHT PANEL — Equation Builder (50%) */}
+              <div className="flex-1 flex flex-col min-w-0 max-w-[50%] overflow-x-hidden">
                 {/* Formula error banner */}
                 {errors.formula && (
                   <div className="flex-shrink-0 px-3 pt-3">
@@ -186,7 +189,7 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
 
                 {/* Builder sub-header */}
                 <div className="flex-shrink-0 px-3 pt-3 pb-2.5 border-b border-slate-700/50">
-                  <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center justify-between gap-3 flex-wrap">
                     <div className="space-y-0.5 flex-1 min-w-0">
                       <h3 className="text-white font-bold text-sm flex items-center gap-1.5">
                         <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -274,7 +277,7 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
                 </div>
 
                 {/* Equation builder content */}
-                <div className="flex-1 p-3">
+                <div className="flex-1 p-3 min-w-0 overflow-x-hidden">
                   <EquationBuilder
                     initialTokens={initialData.tokens || []}
                     onChange={handleFormulaChange}

@@ -387,7 +387,7 @@ const EquationBuilder = ({ initialTokens = [], onChange, portalRoot }) => {
                   <div className="bg-slate-900/60 border border-slate-700/40 rounded px-3 py-2 min-h-[50px] font-mono text-sm text-emerald-400/90 overflow-x-auto hover:border-slate-600/60 transition-colors">
                     {tokens.length === 0 ? (
                       <span className="text-slate-600 text-xs">
-                        Add tokens…
+                        Click on indicator search your indicator and add it
                       </span>
                     ) : (
                       <div className="flex flex-wrap gap-1">
@@ -435,7 +435,7 @@ const EquationBuilder = ({ initialTokens = [], onChange, portalRoot }) => {
                 {/* Function Search */}
                 <div className="space-y-1.5">
                   <p className="text-xs uppercase tracking-widest text-slate-500 font-bold px-1">
-                    Function
+                    Search Indicators
                   </p>
                   <div className="relative">
                     <input
@@ -492,7 +492,7 @@ const EquationBuilder = ({ initialTokens = [], onChange, portalRoot }) => {
                       value={numberValue}
                       onChange={(e) => setNumberValue(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && addNumber()}
-                      placeholder="0"
+                      placeholder="Add After Operator (Numeric Value only)"
                       className="flex-1 px-3 py-2 bg-slate-900/60 border border-slate-700/40 rounded text-purple-300 text-sm placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500/30 focus:border-purple-500/40 transition-all"
                     />
                     <button
