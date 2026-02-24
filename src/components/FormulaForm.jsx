@@ -50,6 +50,7 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
       });
     }
   };
+  
 
   return (
     <>
@@ -70,12 +71,12 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
       `}</style>
 
       {/* ── Root: full height, flex-col ── */}
-      <div className="flex flex-col h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
+      <div className="flex flex-col h-full bg-linear-to-br from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
 
         {/* ══ SCROLLABLE CONTENT ══ */}
         <div className="flex-1 overflow-hidden flex flex-col min-h-0">
           {/* ── Header (scrolls with content) ── */}
-          <div className="flex-shrink-0 border-b border-slate-700/50 bg-slate-900/50 backdrop-blur-sm">
+          <div className="shrink-0 border-b border-slate-700/50 bg-slate-900/50 backdrop-blur-sm">
             {/* Title row */}
             <div className="px-3 py-2.5">
               <div className="space-y-0.5">
@@ -96,7 +97,7 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
             <div className="px-3 pb-3 flex gap-3 items-start">
 
               {/* Name */}
-              <div className="flex-shrink-0 w-56 space-y-1.5">
+              <div className="shrink-0 w-56 space-y-1.5">
                 <label className="flex items-center gap-1 text-xs font-semibold text-slate-300">
                   <svg className="w-3 h-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -122,7 +123,7 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
                 />
                 {errors.name && (
                   <p className="text-rose-400 text-xs flex items-center gap-1 animate-in fade-in slide-in-from-top-1 duration-200">
-                    <svg className="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd"
                         d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
                         clipRule="evenodd" />
@@ -164,7 +165,7 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
           >
             <div className="flex gap-0 w-full max-w-full">
               {/* LEFT SIDEBAR (50%) — portal anchor */}
-              <div className="w-[50%] flex-shrink-0 border-r border-slate-700/50 bg-slate-900/40 backdrop-blur-sm p-3">
+              <div className="w-[50%] shrink-0 border-r border-slate-700/50 bg-slate-900/40 backdrop-blur-sm p-3">
                 <div ref={portalRootRef} className="relative z-50" />
               </div>
 
@@ -172,11 +173,11 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
               <div className="flex-1 flex flex-col min-w-0 max-w-[50%] overflow-x-hidden">
                 {/* Formula error banner */}
                 {errors.formula && (
-                  <div className="flex-shrink-0 px-3 pt-3">
+                  <div className="shrink-0 px-3 pt-3">
                     <div className="bg-rose-500/5 border border-rose-500/20 rounded-lg p-2 backdrop-blur-sm
                       animate-in fade-in slide-in-from-top-2 duration-200">
                       <p className="text-rose-400 text-xs flex items-start gap-1.5 leading-relaxed">
-                        <svg className="w-3 h-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-3 h-3 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd"
                             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
                             clipRule="evenodd" />
@@ -204,7 +205,7 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
                     </div>
 
                     {/* Token count + validity badges */}
-                    <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="flex items-center gap-2 shrink-0">
                       <div className="flex items-center gap-1.5 bg-slate-800/50 backdrop-blur-sm px-2 py-1.5 rounded-lg border border-slate-700/50">
                         <svg className="w-3 h-3 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
@@ -264,7 +265,7 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
                     <div className="mt-2 bg-slate-800/30 backdrop-blur-sm rounded-lg px-2 py-1.5 border border-slate-700/50
                       animate-in fade-in slide-in-from-top-1 duration-200">
                       <div className="flex items-center gap-1.5">
-                        <svg className="w-3 h-3 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                             d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                         </svg>
@@ -290,7 +291,7 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
         </div>
 
         {/* ══ FIXED FOOTER ══ */}
-        <div className="flex-shrink-0 flex items-center justify-between px-3 py-2.5
+        <div className="shrink-0 flex items-center justify-between px-3 py-2.5
           border-t border-slate-700/50 bg-slate-900/50 backdrop-blur-sm">
           <div className="flex items-center gap-1.5 text-xs text-slate-400">
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -316,7 +317,7 @@ const FormulaForm = ({ initialData = {}, onSave, onCancel }) => {
             </button>
             <button
               onClick={handleSubmit}
-              className="px-4 py-2 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-lg
+              className="px-4 py-2 bg-linear-to-r from-cyan-600 to-cyan-500 text-white rounded-lg
                 hover:from-cyan-500 hover:to-cyan-400 font-semibold text-sm transition-all duration-200
                 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02] active:scale-[0.98]
                 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
