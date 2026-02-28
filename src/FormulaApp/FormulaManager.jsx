@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FormulaForm from './components/FormulaForm';
+import FormulaForm from '../components/FormulaForm';
 
 // Main Formula Manager Component
 const FormulaManager = ({ initialFormulas = [], onChange }) => {
